@@ -3,15 +3,11 @@ import Vue from "vue"
 
 export default new Vuex.Store({
     state: {
-        apiToken: "",
-        mapID: -1,
         wndStatuses: {},
         wndCount: 0,
         maxWndZIndex: 0,
     },
     mutations: {
-        setApiToken: (state, payload) => state.apiToken = payload.value,
-        setMapID: (state, payload) => state.mapID = payload.value,
         setWndStatuses: (state, payload) => {
             if( !state.wndStatuses[payload.wndID] ) {
                 Vue.set(state.wndStatuses, payload.wndID, {

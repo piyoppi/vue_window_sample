@@ -9918,23 +9918,27 @@ exports.default = {
     },
     data: function data() {
         return {
-            isVisibleWindow: true,
-            isVisibleWindow2: true,
-            isVisibleWindow3: true
+            isVisibleWindow: true, //Window1 visible
+            isVisibleWindow2: true, //Window2 visible
+            isVisibleWindow3: true //Window3 visible
         };
     },
     store: _store2.default,
     methods: {
         window1RequireInnerItem: function window1RequireInnerItem(callback) {
+            //ウインドウ1に内包すべき要素を設定
             callback(this.$refs.window1Inner);
         },
         window2RequireInnerItem: function window2RequireInnerItem(callback) {
+            //ウインドウ2に内包すべき要素を設定
             callback(this.$refs.window2Inner);
         },
         window3RequireInnerItem: function window3RequireInnerItem(callback) {
+            //ウインドウ3に内包すべき要素を設定
             callback(this.$refs.window3Inner);
         },
         buttonClicked: function buttonClicked(item) {
+            //押されたボタンを表示する
             alert("\u62BC\u3055\u308C\u305F\u30DC\u30BF\u30F3\u306F\u300C" + item.caption + "\u300D");
         }
     }
@@ -10071,19 +10075,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = new _vuex2.default.Store({
     state: {
-        apiToken: "",
-        mapID: -1,
         wndStatuses: {},
         wndCount: 0,
         maxWndZIndex: 0
     },
     mutations: {
-        setApiToken: function setApiToken(state, payload) {
-            return state.apiToken = payload.value;
-        },
-        setMapID: function setMapID(state, payload) {
-            return state.mapID = payload.value;
-        },
         setWndStatuses: function setWndStatuses(state, payload) {
             if (!state.wndStatuses[payload.wndID]) {
                 _vue2.default.set(state.wndStatuses, payload.wndID, {

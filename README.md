@@ -33,7 +33,7 @@ $ npm run build
 ```
 
 ## あそびかた
-`src/main.vue` を参考にしていただければなんとなくわかると思います。
+`src/main.vue` を参考にしていただければなんとなくわかると思いますので、参考にしてください。
 
 テンプレートに設定する各パラメータは以下の通りです
 ```vue
@@ -44,7 +44,6 @@ $ npm run build
                :select-buttons="[{caption: 'はい'}, {caption: 'いいえ'}]"   --- ウインドウ内に表示するボタン（任意：デフォルトは表示しない）
                @button-clicked="..."                                        --- ウインドウ内のボタンが押されたとき（任意）
                ></wnd-component>
-<div ref="window3Inner" class="window-third-inner">
 ```
 
 ウインドウ内に格納する要素は、ウインドウコンポーネントから指示があったときに指定します。

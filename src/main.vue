@@ -46,23 +46,27 @@ export default {
     },
     data: function () {
         return {
-            isVisibleWindow: true,
-            isVisibleWindow2: true,
-            isVisibleWindow3: true,
+            isVisibleWindow: true,                              //Window1 visible
+            isVisibleWindow2: true,                             //Window2 visible
+            isVisibleWindow3: true,                             //Window3 visible
         }
     },
     store,
     methods: {
         window1RequireInnerItem: function(callback){
+            //ウインドウ1に内包すべき要素を設定
             callback(this.$refs.window1Inner);
         },
         window2RequireInnerItem: function(callback){
+            //ウインドウ2に内包すべき要素を設定
             callback(this.$refs.window2Inner);
         },
         window3RequireInnerItem: function(callback){
+            //ウインドウ3に内包すべき要素を設定
             callback(this.$refs.window3Inner);
         },
         buttonClicked: function(item) {
+            //押されたボタンを表示する
             alert(`押されたボタンは「${item.caption}」`);
         }
     },
