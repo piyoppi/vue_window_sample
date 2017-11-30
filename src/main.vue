@@ -2,7 +2,7 @@
     <div class="wnd-area">
         <!-- Window 1 -->
         <wnd-component caption="Window1"
-                       :visible="isVisibleWindow"
+                       :visible.sync="isVisibleWindow"
                        @require-inner-item="window1RequireInnerItem"
                        ref="wnd"
                        ></wnd-component>
@@ -11,6 +11,13 @@
         </div>
 
         <!-- Window 2 -->
+        <wnd-component caption="Window2"
+                       :visible.sync="isVisibleWindow2"
+                       @require-inner-item="window2RequireInnerItem"
+                       ></wnd-component>
+        <div ref="window2Inner" class="window-second-inner">
+            <img src="img/hakoneko.png" alt="neko">
+        </div>
 
         <!-- Window 3 -->
     </div>
@@ -29,12 +36,16 @@ export default {
     data: function () {
         return {
             isVisibleWindow: true,
+            isVisibleWindow2: true,
         }
     },
     store,
     methods: {
         window1RequireInnerItem: function(callback){
             callback(this.$refs.window1Inner);
+        },
+        window2RequireInnerItem: function(callback){
+            callback(this.$refs.window2Inner);
         }
     },
 }
@@ -52,5 +63,13 @@ export default {
     width: 200px;
     height: 100px;
     color: white;
+}
+.window-second-inner {
+    color: white;
+}
+.window-second-inner img {
+    display: block;
+    width: 300px;
+    height: 300px;
 }
 </style>
