@@ -1,7 +1,8 @@
 # Vue.jsでモーダルウインドウなサンプルプログラム
 
 ## 概要
-私が自分のプロダクトのために作ったモーダルウインドウのサンプルプログラムを公開しています
+私が自分のプロダクトのために作ったモーダルウインドウのサンプルプログラムを公開しています。
+製作途中で見苦しいところもあるかもですが、ご了承ください。
 
 ## 使い方
 ```
@@ -31,3 +32,44 @@ $ npm run build
 └  webpack.config.js
 ```
 
+## あそびかた
+`src/main.vue` を参考にしていただければなんとなくわかると思います。
+
+テンプレートに設定する各パラメータは以下の通りです
+```vue
+<wnd-component caption="..."                                                --- ウインドウのキャプション 
+               :visible.sync="..."                                          --- ウインドウの表示状態
+               @require-inner-item="..."                                    --- ウインドウ内に収める要素が要求されるときに呼び出されるイベント
+               :initial-position="[30, 30]"                                 --- 初期位置（任意：デフォルトはページ中央）
+               :select-buttons="[{caption: 'はい'}, {caption: 'いいえ'}]"   --- ウインドウ内に表示するボタン（任意：デフォルトは表示しない）
+               @button-clicked="..."                                        --- ウインドウ内のボタンが押されたとき（任意）
+               ></wnd-component>
+<div ref="window3Inner" class="window-third-inner">
+```
+
+ウインドウ内に格納する要素は、ウインドウコンポーネントから指示があったときに指定します。
+`@require-inner-item` に設定した関数のコールバック関数に内包すべき要素を設定してください。
+
+```vue
+# hoge.vue
+
+<template>
+    ...
+    <wnd-component caption="Window1" @require-inner-item="setInnerElement" ... >
+    <div ref="windowInner">
+        Hello world!!
+    </div>
+</template>
+
+<script>
+    export default {
+        ...
+        methods: {
+            setInnerElement: function(callback){
+                callback(this.$refs.windowInner);
+            },
+        }
+        ...
+    }
+<script>
+```

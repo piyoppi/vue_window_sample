@@ -13,6 +13,7 @@
         <!-- Window 2 -->
         <wnd-component caption="Window2"
                        :visible.sync="isVisibleWindow2"
+                       :initial-position="[160, 160]"
                        @require-inner-item="window2RequireInnerItem"
                        ></wnd-component>
         <div ref="window2Inner" class="window-second-inner">
@@ -20,6 +21,16 @@
         </div>
 
         <!-- Window 3 -->
+        <wnd-component caption="Window3"
+                       :visible.sync="isVisibleWindow3"
+                       @require-inner-item="window3RequireInnerItem"
+                       @button-clicked="buttonClicked"
+                       :initial-position="[30, 30]"
+                       :select-buttons="[{caption: 'はい'}, {caption: 'いいえ'}]"
+                       ></wnd-component>
+        <div ref="window3Inner" class="window-third-inner">
+            （はい：いいえボタンのテストです）これでいいですか？
+        </div>
     </div>
 </template>
 
@@ -37,6 +48,7 @@ export default {
         return {
             isVisibleWindow: true,
             isVisibleWindow2: true,
+            isVisibleWindow3: true,
         }
     },
     store,
@@ -46,6 +58,12 @@ export default {
         },
         window2RequireInnerItem: function(callback){
             callback(this.$refs.window2Inner);
+        },
+        window3RequireInnerItem: function(callback){
+            callback(this.$refs.window3Inner);
+        },
+        buttonClicked: function(item) {
+            alert(`押されたボタンは「${item.caption}」`);
         }
     },
 }
@@ -64,7 +82,7 @@ export default {
     height: 100px;
     color: white;
 }
-.window-second-inner {
+.window-second-inner, .window-third-inner {
     color: white;
 }
 .window-second-inner img {
