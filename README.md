@@ -17,18 +17,18 @@ $ npm run build
 ```
 ├  README.md
 ├── dist
-│   ├ img                     --- サンプルで使う画像たち
-│   │     hakoneko.png
-│   ├ index.html              --- サンプルを実行できる環境
-│   └ js
-│       └ main.bundle.js
+│   ├ img                     --- サンプルで使う画像たち
+│   │  └ hakoneko.png
+│   ├ index.html              --- サンプルを実行できる環境
+│   └ js
+│       └ main.bundle.js
 ├  package-lock.json
 ├  package.json
 ├── src
-│   ├ main.js                 --- vueオブジェクトの生成周り
-│   ├ main.vue                --- サンプルウインドウの表示
-│   ├ store.js                --- vuex周りの定義
-│   └ wnd.vue                 --- ウインドウコンポーネント
+│   ├ main.js                 --- vueオブジェクトの生成周り
+│   ├ main.vue                --- サンプルウインドウの表示
+│   ├ store.js                --- vuex周りの定義
+│   └ wnd.vue                 --- ウインドウコンポーネント
 └  webpack.config.js
 ```
 
@@ -61,6 +61,10 @@ $ npm run build
 </template>
 
 <script>
+    import wndComponent from "./wnd.vue"
+    components: {
+        wndComponent
+    },
     export default {
         ...
         methods: {

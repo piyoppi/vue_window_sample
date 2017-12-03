@@ -4,7 +4,6 @@
         <wnd-component caption="Window1"
                        :visible.sync="isVisibleWindow"
                        @require-inner-item="window1RequireInnerItem"
-                       ref="wnd"
                        ></wnd-component>
         <div ref="window1Inner" class="window-first-inner">
             Hello world!!
@@ -36,7 +35,6 @@
 
 <script>
 
-import Vue from "vue"
 import store from "./store.js"
 import wndComponent from "./wnd.vue"
 
