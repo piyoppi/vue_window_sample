@@ -62,8 +62,8 @@ $ npm run build
 </template>
 
 <script>
-    import wndComponent from "./wnd.vue"
-    import store from "./store.js"
+import wndComponent from "./wnd.vue"
+import store from "./store.js"
 
 export default {
     components: {
@@ -76,6 +76,7 @@ export default {
     },
     store,
     methods: {
+       //ここでウインドウに内包すべき要素を設定します！
        setInnerElement: function(callback){
            callback(this.$refs.windowInner);
        }
