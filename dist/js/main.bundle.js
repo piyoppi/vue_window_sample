@@ -10027,6 +10027,9 @@ exports.default = new _vuex2.default.Store({
     actions: {
         setWndStatuses: function setWndStatuses(context, payload) {
             context.commit('setWndStatuses', payload);
+        },
+        moveWndToTop: function moveWndToTop(context, payload) {
+            context.commit('moveWndToTop', payload);
         }
     }
 });
@@ -10167,7 +10170,10 @@ exports.default = {
         };
     },
     props: {
-        visible: Boolean,
+        visible: {
+            type: Boolean,
+            default: true
+        },
         caption: {
             type: String,
             default: ""
@@ -10233,7 +10239,7 @@ exports.default = {
 
         this.$emit('require-inner-item', function (el) {
             _this.$refs.wndInner.appendChild(el);
-            //�iv-show=false�̎��͗v�f�̍����������Ȃ��̂ŏ��������Ȃ��j
+            //（v-show=falseの時は要素の高さが取れないので初期化しない）
             if (_this.visible && _this.$el) {
                 _this.setInitialState();
             }
@@ -10249,7 +10255,7 @@ exports.default = {
             this.setInitialState();
         },
         setInitialState: function setInitialState() {
-            //v-if�Ȃǂŗv�f���̂������Ȃ��ꍇ�͏����𒆒f
+            //v-ifなどで要素自体が取れない場合は処理を中断
             if (!this.$el || !this.$refs.wndInner) return;
             var buttonItemRect = null;
             if (this.selectButtons.length) {
@@ -10259,7 +10265,7 @@ exports.default = {
             this.width = this.initialWidth || innerItemRect.width;
             this.height = (this.initialHeight || innerItemRect.height) + 22 + (this.selectButtons.length && buttonItemRect ? buttonItemRect.height : 0);
 
-            //���������ς��ł����Ώ������I��
+            //初期化が済んでいれば処理を終了
             if (this.x !== null && this.y !== null) return;
             if (this.initialPosition && this.initialPosition.length === 2) {
                 this.x = this.initialPosition[0];
@@ -10280,7 +10286,7 @@ exports.default = {
             this.cursorStartPos = { x: this.x, y: this.y };
             document.addEventListener("mousemove", this.mousemove);
             document.addEventListener("mouseup", this.mouseup);
-            this.$store.commit('moveWndToTop', { wndID: this.wndID });
+            this.$store.dispatch('moveWndToTop', { wndID: this.wndID });
         },
         mousemove: function mousemove(e) {
             this.x = this.cursorStartPos.x + (e.pageX - this.cursorOffset.x);

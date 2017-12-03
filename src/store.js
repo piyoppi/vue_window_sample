@@ -30,6 +30,9 @@ export default new Vuex.Store({
     actions: {
         setWndStatuses(context, payload) {
             context.commit('setWndStatuses', payload);
+        },
+        moveWndToTop(context, payload) {
+            context.commit('moveWndToTop', payload);
         }
     }
 });

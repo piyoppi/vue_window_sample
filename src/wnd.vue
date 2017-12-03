@@ -40,7 +40,10 @@ export default {
         }
     },
     props: {
-        visible: Boolean,
+        visible: {
+            type: Boolean,
+            default: true
+        },
         caption: {
             type: String,
             default: "" 
@@ -102,7 +105,7 @@ export default {
     mounted: function(){
         this.$emit('require-inner-item', el => {
             this.$refs.wndInner.appendChild(el);
-            //iv-show=false‚Ì‚Í—v‘f‚Ì‚‚³‚ªæ‚ê‚È‚¢‚Ì‚Å‰Šú‰»‚µ‚È‚¢j
+            //ï¼ˆv-show=falseã®æ™‚ã¯è¦ç´ ã®é«˜ã•ãŒå–ã‚Œãªã„ã®ã§åˆæœŸåŒ–ã—ãªã„ï¼‰
             if( this.visible && this.$el ){
                 this.setInitialState();
             }
@@ -118,7 +121,7 @@ export default {
             this.setInitialState();
         },
         setInitialState: function() {
-            //v-if‚È‚Ç‚Å—v‘f©‘Ì‚ªæ‚ê‚È‚¢ê‡‚Íˆ—‚ğ’†’f
+            //v-ifãªã©ã§è¦ç´ è‡ªä½“ãŒå–ã‚Œãªã„å ´åˆã¯å‡¦ç†ã‚’ä¸­æ–­
             if( !this.$el || !this.$refs.wndInner ) return;
             let buttonItemRect = null;
             if( this.selectButtons.length ) {
@@ -128,7 +131,7 @@ export default {
             this.width = this.initialWidth || innerItemRect.width;
             this.height = (this.initialHeight || innerItemRect.height) + 22 + ((this.selectButtons.length && buttonItemRect) ? buttonItemRect.height : 0);
 
-            //‰Šú‰»‚ªÏ‚ñ‚Å‚¢‚ê‚Îˆ—‚ğI—¹
+            //åˆæœŸåŒ–ãŒæ¸ˆã‚“ã§ã„ã‚Œã°å‡¦ç†ã‚’çµ‚äº†
             if( (this.x !== null) && (this.y !== null) ) return;
             if( this.initialPosition && this.initialPosition.length === 2 ){
                 this.x = this.initialPosition[0];
@@ -149,7 +152,7 @@ export default {
             this.cursorStartPos = {x: this.x, y: this.y};
             document.addEventListener("mousemove", this.mousemove)
             document.addEventListener("mouseup", this.mouseup)
-            this.$store.commit('moveWndToTop', {wndID: this.wndID});
+            this.$store.dispatch('moveWndToTop', {wndID: this.wndID});
         },
         mousemove: function(e) {
             this.x = this.cursorStartPos.x + (e.pageX - this.cursorOffset.x);

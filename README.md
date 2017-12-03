@@ -1,7 +1,7 @@
-# Vue.jsでモーダルウインドウなサンプルプログラム
+# Vue.jsでウインドウなサンプルプログラム
 
 ## 概要
-私が自分のプロダクトのために作ったモーダルウインドウのサンプルプログラムを公開しています。
+私が自分のプロダクトのために作ったウインドウのサンプルプログラムを公開しています。
 製作途中で見苦しいところもあるかもですが、ご了承ください。
 
 ## 使い方
@@ -53,8 +53,9 @@ $ npm run build
 # hoge.vue
 
 <template>
-    ...
-    <wnd-component caption="Window1" @require-inner-item="setInnerElement" ... >
+    <wnd-component caption="Window1"
+                   @require-inner-item="setInnerElement"
+                   :visible.sync="isVisibleWindow"></wnd-component>
     <div ref="windowInner">
         Hello world!!
     </div>
@@ -62,17 +63,23 @@ $ npm run build
 
 <script>
     import wndComponent from "./wnd.vue"
+    import store from "./store.js"
+
+export default {
     components: {
         wndComponent
     },
-    export default {
-        ...
-        methods: {
-            setInnerElement: function(callback){
-                callback(this.$refs.windowInner);
-            },
+    data: function () {
+        return {
+            isVisibleWindow: true
         }
-        ...
+    },
+    store,
+    methods: {
+       setInnerElement: function(callback){
+           callback(this.$refs.windowInner);
+       }
     }
+}
 <script>
 ```
